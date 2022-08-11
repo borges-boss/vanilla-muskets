@@ -1,0 +1,13 @@
+{
+  "type":"crafting_shaped",
+  "pattern":[
+    "IIG"],
+  "key": {
+    "G": { "item":"minecraft:gunpowder"},
+    "I": { "item":"minecraft:iron_ingot"}
+  },
+  "result": {
+    "item": "vanillamuskets:iron_bullet",
+    "count": 2
+  }
+}

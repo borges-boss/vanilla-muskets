@@ -1,0 +1,16 @@
+{
+  "item.vanillamuskets.musket": "Musket",
+  "item.vanillamuskets.bullet": "Bullet",
+  "item.vanillamuskets.iron_bullet": "Iron Bullet",
+  "item.vanillamuskets.copper_bullet": "Copper Bullet",
+  "item.vanillamuskets.ender_bullet": "Ender Bullet",
+  "sounds.vanillamuskets.shoot1": "Shoot sound for musket",
+  "sounds.vanillamuskets.loading1": "loading start sound for musket",
+  "sounds.vanillamuskets.loading2": "loading middle sound for musket",
+  "sounds.vanillamuskets.loading3": "loading end sound for musket",
+  "argument.pos.missing.double": "Expected a coordinate",
+  "argument.pos.missing.int": "Expected a block position",
+  "argument.entity.selector.missing": "Missing selector type",
+  "realms.missing.module.error.text": "Realms could not be opened right now, please try again later",
+  "realms.missing.snapshot.error.text": "Realms is currently not supported in snapshots"
+}

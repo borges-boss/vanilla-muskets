@@ -1,0 +1,13 @@
+{
+  "type":"crafting_shaped",
+  "pattern":[
+    "CCG"],
+  "key": {
+    "G": { "item":"minecraft:gunpowder"},
+    "C": { "item":"minecraft:copper_ingot"}
+  },
+  "result": {
+    "item": "vanillamuskets:bullet",
+    "count": 2
+  }
+}

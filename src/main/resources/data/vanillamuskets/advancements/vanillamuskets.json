@@ -1,0 +1,27 @@
+{
+  "display": {
+    "icon": {
+      "item": "vanillamuskets:musket"
+    },
+    "title": "Gunpowder & Lead",
+    "description": "Craft a musket",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "background": "minecraft:textures/block/oak_planks.png"
+  },
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "vanillamuskets:musket"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

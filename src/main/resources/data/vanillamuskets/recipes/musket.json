@@ -1,0 +1,16 @@
+{
+  "type":"crafting_shaped",
+  "pattern":[
+    "IIT",
+    "OOB"],
+  "key": {
+    "O": { "item":"minecraft:oak_planks"},
+    "I": { "item":"minecraft:iron_ingot"},
+    "T": { "item":"minecraft:tripwire_hook"},
+    "B": { "item":"minecraft:oak_button"}
+  },
+  "result": {
+    "item": "vanillamuskets:musket",
+    "count": 1
+  }
+}

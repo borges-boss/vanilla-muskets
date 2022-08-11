@@ -1,0 +1,19 @@
+{
+  "shoot1":{
+    "subtitle": "sounds.vanillamuskets.shoot1",
+    "sounds":["vanillamuskets:shoot1"]
+  },
+  "loading1":{
+    "subtitle": "sounds.vanillamuskets.loading1",
+    "sounds":["vanillamuskets:loading1"]
+  },
+  "loading2":{
+    "subtitle": "sounds.vanillamuskets.loading2",
+    "sounds":["vanillamuskets:loading2"]
+  },
+  "loading3":{
+    "subtitle": "sounds.vanillamuskets.loading3",
+    "sounds":["vanillamuskets:loading3"]
+  }
+
+}

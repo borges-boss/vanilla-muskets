@@ -1,0 +1,14 @@
+{
+  "type":"crafting_shaped",
+  "pattern":[
+    "LEG"],
+  "key": {
+    "G": { "item":"minecraft:gold_ingot"},
+    "E": { "item":"minecraft:ender_pearl"},
+    "L": { "item":"minecraft:lava_bucket"}
+  },
+  "result": {
+    "item": "vanillamuskets:ender_bullet",
+    "count": 1
+  }
+}
