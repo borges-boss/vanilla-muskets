@@ -29,7 +29,7 @@ public class EnderBulletItem extends ArrowItem {
 
     @Override
     public void appendHoverText(ItemStack p_41421_, @Nullable Level p_41422_, List<Component> componentList, TooltipFlag p_41424_) {
-        componentList.add(Component.literal("Effective against Enderman").withStyle(ChatFormatting.LIGHT_PURPLE).withStyle(ChatFormatting.ITALIC));
+        componentList.add(Component.literal("Effective against the Endermen").withStyle(ChatFormatting.LIGHT_PURPLE).withStyle(ChatFormatting.ITALIC));
     }
 
     @Override

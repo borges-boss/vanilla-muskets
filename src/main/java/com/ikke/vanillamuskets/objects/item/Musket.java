@@ -1,8 +1,7 @@
 package com.ikke.vanillamuskets.objects.item;
 
 import com.google.common.collect.Lists;
-import com.mojang.math.Quaternion;
-import com.mojang.math.Vector3f;
+import com.ikke.vanillamuskets.client.VanillaMusketsSoundEvents;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -26,14 +25,15 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
-
+import org.joml.Quaternionf;
+import org.joml.Vector3f;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Predicate;
 
 import static com.ikke.vanillamuskets.VanillaMuskets.*;
 
-public class Musket extends ProjectileWeaponItem {
+public class Musket extends CrossbowItem {
     private RandomSource random = RandomSource.create();
     public static final Predicate<ItemStack> IRON_BULLET = (stack) -> stack.is(IRON_BULLET_ITEM.get());
 
@@ -183,7 +183,7 @@ public class Musket extends ProjectileWeaponItem {
         if (!isCharged(stack) && tryLoadProjectiles(livingEntity, stack)) {
             setCharged(stack, true);
             SoundSource soundsource = livingEntity instanceof Player ? SoundSource.PLAYERS : SoundSource.HOSTILE;
-            level.playSound((Player)null, livingEntity.getX(), livingEntity.getY(), livingEntity.getZ(), LOADING3.get(), soundsource, 1.0F, 1.0F / (level.getRandom().nextFloat() * 0.5F + 1.0F) + 0.2F);
+            level.playSound((Player)null, livingEntity.getX(), livingEntity.getY(), livingEntity.getZ(), VanillaMusketsSoundEvents.LOADING3.get(), soundsource, 1.0F, 1.0F / (level.getRandom().nextFloat() * 0.5F + 1.0F) + 0.2F);
         }
     }
 
@@ -277,10 +277,9 @@ public class Musket extends ProjectileWeaponItem {
                 crossbowattackmob.shootCrossbowProjectile(Objects.requireNonNull(crossbowattackmob.getTarget()), p_40898_, projectile, p_40904_);
             } else {
                 Vec3 vec31 = livingEntity.getUpVector(1.0F);
-                Quaternion quaternion = new Quaternion(new Vector3f(vec31), p_40904_, true);
+                Quaternionf quaternionf = (new Quaternionf()).setAngleAxis((double)(p_40904_ * ((float)Math.PI / 180F)), vec31.x, vec31.y, vec31.z);
                 Vec3 vec3 = livingEntity.getViewVector(1.0F);
-                Vector3f vector3f = new Vector3f(vec3);
-                vector3f.transform(quaternion);
+                Vector3f vector3f = vec3.toVector3f().rotate(quaternionf);
                 projectile.shoot((double)vector3f.x(), (double)vector3f.y(), (double)vector3f.z(), p_40902_, p_40903_);
             }
 
@@ -288,7 +287,8 @@ public class Musket extends ProjectileWeaponItem {
                 p_40858_.broadcastBreakEvent(interactionHand);
             });
             level.addFreshEntity(projectile);
-            level.playSound((Player) null, livingEntity.getX(), livingEntity.getY(), livingEntity.getZ(), SHOOT1.get(), SoundSource.PLAYERS, 1.0F, p_40900_);
+
+            level.playSound((Player) null, livingEntity.getX(), livingEntity.getY(), livingEntity.getZ(), VanillaMusketsSoundEvents.SHOOT1.get(), SoundSource.PLAYERS, 1.0F, p_40900_);
         }
     }
 

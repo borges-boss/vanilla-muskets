@@ -4,6 +4,7 @@ import com.ikke.vanillamuskets.VanillaMuskets;
 import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.protocol.game.ClientboundGameEventPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -14,6 +15,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageSources;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -325,7 +327,7 @@ public class Bullet extends Projectile {
 
         Entity entity1 = this.getOwner();
         DamageSource damagesource;
-        damagesource = DamageSource.DRAGON_BREATH;
+        damagesource = new DamageSources(RegistryAccess.EMPTY).dragonBreath();
         if (entity1 != null) {
             if (entity1 instanceof LivingEntity) {
                 ((LivingEntity) entity1).setLastHurtMob(entity);

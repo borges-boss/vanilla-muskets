@@ -1,12 +1,16 @@
 package com.ikke.vanillamuskets.world.entity.projectiles;
 
 import com.ikke.vanillamuskets.VanillaMuskets;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageSources;
+import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
 import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
@@ -56,6 +60,8 @@ public class EnderBullet extends AbstractArrow {
 
         boolean flag = entityHitResult.getEntity().getType() == EntityType.ENDERMAN;
 
+        boolean isEnderDragon = entityHitResult.getEntity().getType() == EntityType.ENDER_DRAGON;
+
         if(flag) {
             double x = entityHitResult.getLocation().x;
             double y = entityHitResult.getLocation().y;
@@ -68,7 +74,8 @@ public class EnderBullet extends AbstractArrow {
             if(enderMan.isUsingItem()) {
                 enderMan.stopUsingItem();
             }
-            enderMan.hurt(DamageSource.playerAttack((Player) player),1.0F);
+
+            enderMan.hurt((DamageSource) new DamageSources(this.getCommandSenderWorld().registryAccess()).fall(),1.0F);
 
 
             //Freezes the EnderMan in place
@@ -79,31 +86,33 @@ public class EnderBullet extends AbstractArrow {
             enderMan.setBeingStaredAt();
             enderMan.startPersistentAngerTimer();
 
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    for(int i = 0;i < 4;i++) {
-                        enderMan.getNavigation().stop();
-                        enderMan.teleportTo(x, y, z);
-                        enderMan.playSound(SoundEvents.ENDERMAN_TELEPORT);
-                        enderMan.playSound(SoundEvents.ENDERMAN_SCREAM);
+            new Thread(() -> {
+                for(int i = 0;i < 4;i++) {
+                    enderMan.getNavigation().stop();
+                    enderMan.teleportTo(x, y, z);
+                    enderMan.playSound(SoundEvents.ENDERMAN_TELEPORT);
+                    enderMan.playSound(SoundEvents.ENDERMAN_SCREAM);
 
 
-                        try {
-                            Thread.sleep(1000);
-                        } catch (InterruptedException e) {
-                            throw new RuntimeException(e);
-                        }
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
                     }
-
-                    enderMan.playSound(SoundEvents.DRAGON_FIREBALL_EXPLODE);
-                    enderMan.kill();
-                    enderMen.remove(enderMan);
-                    Thread.currentThread().interrupt();
                 }
+
+                enderMan.playSound(SoundEvents.DRAGON_FIREBALL_EXPLODE);
+                enderMan.kill();
+                enderMen.remove(enderMan);
+                Thread.currentThread().interrupt();
             }).start();
 
             }
+        }
+        else if(isEnderDragon) {
+            EnderDragon dragon = (EnderDragon) entityHitResult.getEntity();
+            dragon.hurt((DamageSource) new DamageSources(this.getCommandSenderWorld().registryAccess()).magic(),50.0F);
+            dragon.playSound(SoundEvents.CREEPER_PRIMED);
         }
     }
 
